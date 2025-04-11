@@ -13,7 +13,7 @@ public sealed class DailyTask : Entity
 	public DailyTaskDescription Description { get; private set; }
 
 	private DailyTask(
-		Guid id,
+		Guid id,   
 		DailyTaskName dailyTaskName,
 		Guid sprintTaskId,
 		DateTime startDate,
