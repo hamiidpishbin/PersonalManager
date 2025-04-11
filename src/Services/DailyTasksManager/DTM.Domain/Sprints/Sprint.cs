@@ -1,30 +1,34 @@
-using DTM.Domain.Abstractions;
+using Common.Abstractions;
+using DTM.Domain.Sprints.Events;
 
 namespace DTM.Domain.Sprints;
 
 public class Sprint : Entity
 {
+	public SprintName SprintName { get; private set; }
+	public DateTime StartDate { get; private set; }
+	public DateTime EndDate { get; private set; }
+	
 	private Sprint(
 		Guid id,
-		Name name,
+		SprintName sprintName,
 		DateTime startDate,
 		DateTime endDate) : base(id)
 	{
-		Name = name;
+		SprintName = sprintName;
 		StartDate = startDate;
 		EndDate = endDate;
 	}
-	
-	public Name Name { get; private set; }
-	public DateTime StartDate { get; private set; }
-	public DateTime EndDate { get; private set; }
 
 	public static Sprint Create(
-		Guid id,
-		Name name,
+		SprintName sprintName,
 		DateTime startDate,
 		DateTime endDate)
 	{
-		return new Sprint(id, name, startDate, endDate);
+		var sprint = new Sprint(Guid.NewGuid(), sprintName, startDate, endDate);
+		
+		sprint.RaiseDomainEvent(new SprintCreatedDomainEvent(sprint.Id));
+		
+		return sprint;
 	}
 }
