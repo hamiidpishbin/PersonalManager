@@ -1,0 +1,6 @@
+﻿services:
+  dtm.api:
+    image: dtm.api
+    build:
+      context: .
+      dockerfile: src/Services/DTM.API/Dockerfile

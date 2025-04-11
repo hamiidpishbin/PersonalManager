@@ -1,8 +1,29 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{4ACD44DA-AC01-4189-95AD-6F2933463608}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DailyTasksManager", "DailyTasksManager", "{D2E1DE70-50BF-4FCE-8CB6-77DEFED2C1B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTM.API", "src\Services\DTM.API\DTM.API.csproj", "{DF000381-BCAC-43DD-86C9-5D5D6FF7FCE1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{06FD1404-652D-467E-B10E-0F83E9815581}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D2E1DE70-50BF-4FCE-8CB6-77DEFED2C1B3} = {4ACD44DA-AC01-4189-95AD-6F2933463608}
+		{DF000381-BCAC-43DD-86C9-5D5D6FF7FCE1} = {D2E1DE70-50BF-4FCE-8CB6-77DEFED2C1B3}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF000381-BCAC-43DD-86C9-5D5D6FF7FCE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF000381-BCAC-43DD-86C9-5D5D6FF7FCE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF000381-BCAC-43DD-86C9-5D5D6FF7FCE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF000381-BCAC-43DD-86C9-5D5D6FF7FCE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
