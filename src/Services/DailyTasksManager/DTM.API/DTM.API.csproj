@@ -17,4 +17,10 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\DTM.Application\DTM.Application.csproj" />
+      <ProjectReference Include="..\DTM.Domain\DTM.Domain.csproj" />
+      <ProjectReference Include="..\DTM.Infrastructure\DTM.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>
