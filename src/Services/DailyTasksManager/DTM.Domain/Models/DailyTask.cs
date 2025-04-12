@@ -1,7 +1,8 @@
 using Common.Abstractions;
-using DTM.Domain.DailyTasks.Events;
+using DTM.Domain.Events;
+using DTM.Domain.ValueObjects;
 
-namespace DTM.Domain.DailyTasks;
+namespace DTM.Domain.Models;
 
 public sealed class DailyTask : Entity
 {

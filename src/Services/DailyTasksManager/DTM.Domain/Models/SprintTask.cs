@@ -1,7 +1,9 @@
 using Common.Abstractions;
-using DTM.Domain.SprintTasks.Events;
+using DTM.Domain.Enums;
+using DTM.Domain.Events;
+using DTM.Domain.ValueObjects;
 
-namespace DTM.Domain.SprintTasks;
+namespace DTM.Domain.Models;
 
 public sealed class SprintTask : Entity
 {

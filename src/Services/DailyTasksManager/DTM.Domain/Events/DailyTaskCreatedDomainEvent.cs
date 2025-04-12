@@ -1,5 +1,5 @@
 using Common.Messaging;
 
-namespace DTM.Domain.DailyTasks.Events;
+namespace DTM.Domain.Events;
 
 public record DailyTaskCreatedDomainEvent(Guid DailyTaskId) : IDomainEvent;

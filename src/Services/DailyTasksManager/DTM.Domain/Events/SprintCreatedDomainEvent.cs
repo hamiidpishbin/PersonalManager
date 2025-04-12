@@ -1,6 +1,5 @@
 using Common.Messaging;
-using MediatR;
 
-namespace DTM.Domain.Sprints.Events;
+namespace DTM.Domain.Events;
 
 public record SprintCreatedDomainEvent(Guid SprintId) : IDomainEvent;

@@ -1,4 +1,4 @@
-namespace DTM.Domain.SprintTasks;
+namespace DTM.Domain.Enums;
 
 public enum Status
 {

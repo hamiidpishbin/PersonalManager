@@ -1,7 +1,8 @@
 using Common.Abstractions;
-using DTM.Domain.Sprints.Events;
+using DTM.Domain.Events;
+using DTM.Domain.ValueObjects;
 
-namespace DTM.Domain.Sprints;
+namespace DTM.Domain.Models;
 
 public class Sprint : Entity
 {
