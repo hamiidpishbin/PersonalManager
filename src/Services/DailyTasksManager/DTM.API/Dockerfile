@@ -7,10 +7,10 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/Services/DTM.API/DTM.API.csproj", "src/Services/DTM.API/"]
-RUN dotnet restore "src/Services/DTM.API/DTM.API.csproj"
+COPY ["src/Services/DailyTasksManager/DTM.API/DTM.API.csproj", "src/Services/DailyTasksManager/DTM.API/"]
+RUN dotnet restore "src/Services/DailyTasksManager/DTM.API/DTM.API.csproj"
 COPY . .
-WORKDIR "/src/src/Services/DTM.API"
+WORKDIR "/src/src/Services/DailyTasksManager/DTM.API"
 RUN dotnet build "DTM.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

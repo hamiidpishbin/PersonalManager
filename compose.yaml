@@ -3,4 +3,36 @@
     image: dtm.api
     build:
       context: .
-      dockerfile: src/Services/DTM.API/Dockerfile
+      dockerfile: src/Services/DailyTasksManager/DTM.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+    ports:
+      - "9001:8080"
+      - "9091:8081"
+
+  keycloak.auth.api:
+    image: keycloak.auth.api
+    container_name: keycloak.auth.api
+    build:
+      context: .
+      dockerfile: src/Services/Identity/KeyCloak.Auth.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+    ports:
+      - "9000:8080"
+      - "9090:8081"
+        
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+    command: start-dev
+    environment:
+      - KC_HEALTH_ENABLED=true
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    volumes:
+      - ./.containers/identity:/opt/keycloak/data
+    ports:
+      - "18080:8080"
