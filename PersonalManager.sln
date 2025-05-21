@@ -4,18 +4,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{4A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DailyTasksManager", "DailyTasksManager", "{D2E1DE70-50BF-4FCE-8CB6-77DEFED2C1B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTM.API", "src\Services\DailyTasksManager\DTM.API\DTM.API.csproj", "{DF000381-BCAC-43DD-86C9-5D5D6FF7FCE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PM.DTM.API", "src\Services\DailyTasksManager\PM.DTM.API\PM.DTM.API.csproj", "{DF000381-BCAC-43DD-86C9-5D5D6FF7FCE1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{06FD1404-652D-467E-B10E-0F83E9815581}"
 	ProjectSection(SolutionItems) = preProject
 		compose.yaml = compose.yaml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTM.Application", "src\Services\DailyTasksManager\DTM.Application\DTM.Application.csproj", "{D59413F1-460E-4FDC-BC30-C4A85C480F95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PM.DTM.Application", "src\Services\DailyTasksManager\PM.DTM.Application\PM.DTM.Application.csproj", "{D59413F1-460E-4FDC-BC30-C4A85C480F95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTM.Domain", "src\Services\DailyTasksManager\DTM.Domain\DTM.Domain.csproj", "{2776BBC7-2CEC-4706-9CAD-C45077162DD4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PM.DTM.Domain", "src\Services\DailyTasksManager\PM.DTM.Domain\PM.DTM.Domain.csproj", "{2776BBC7-2CEC-4706-9CAD-C45077162DD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTM.Infrastructure", "src\Services\DailyTasksManager\DTM.Infrastructure\DTM.Infrastructure.csproj", "{3148725C-F254-4293-A2D1-A5DDE43F6A82}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PM.DTM.Infrastructure", "src\Services\DailyTasksManager\PM.DTM.Infrastructure\PM.DTM.Infrastructure.csproj", "{3148725C-F254-4293-A2D1-A5DDE43F6A82}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{492B8F47-27B3-4E7D-96DE-94825DA8713A}"
 EndProject

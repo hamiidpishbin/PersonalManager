@@ -1,4 +1,4 @@
-namespace DTM.Domain.Enums;
+namespace PM.DTM.Domain.Enums;
 
 public enum Status
 {
