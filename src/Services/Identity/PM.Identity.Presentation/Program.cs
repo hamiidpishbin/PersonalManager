@@ -1,6 +1,14 @@
+using PM.Identity.Application;
+using PM.Identity.Infrastructure;
+using PM.Identity.Presentation;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services
+	.AddApplicationServices()
+	.AddInfrastructureServices()
+	.AddPresentationServices();
 
 var app = builder.Build();
 

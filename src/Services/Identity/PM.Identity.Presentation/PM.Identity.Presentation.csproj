@@ -22,4 +22,10 @@
       <Folder Include="RegisterUser\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\PM.Identity.Application\PM.Identity.Application.csproj" />
+      <ProjectReference Include="..\PM.Identity.Domain\PM.Identity.Domain.csproj" />
+      <ProjectReference Include="..\PM.Identity.Infrastructure\PM.Identity.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>
