@@ -25,7 +25,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{09
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyCloak.Auth.API", "src\Services\Identity\KeyCloak.Auth.API\KeyCloak.Auth.API.csproj", "{17284A08-A95F-47A9-9B30-974CCB7CDD54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PM.Identity", "src\Services\Identity\PM.Identity\PM.Identity.csproj", "{A57EBB30-9D82-4F77-A907-AD22EE5F6D76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PM.Identity.Presentation", "src\Services\Identity\PM.Identity.Presentation\PM.Identity.Presentation.csproj", "{A57EBB30-9D82-4F77-A907-AD22EE5F6D76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PM.Identity.Application", "src\Services\Identity\PM.Identity.Application\PM.Identity.Application.csproj", "{A9C47BA6-8A5D-44DC-AB94-30E3E4F42052}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PM.Identity.Domain", "src\Services\Identity\PM.Identity.Domain\PM.Identity.Domain.csproj", "{0F50D394-69B8-4CED-9F24-52EA486331CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PM.Identity.Infrastructure", "src\Services\Identity\PM.Identity.Infrastructure\PM.Identity.Infrastructure.csproj", "{4EA76C14-F7EE-4715-A1FD-19FC67405B6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +48,9 @@ Global
 		{09630D75-EBA1-431A-B3A3-5037EB4AEC43} = {4ACD44DA-AC01-4189-95AD-6F2933463608}
 		{17284A08-A95F-47A9-9B30-974CCB7CDD54} = {09630D75-EBA1-431A-B3A3-5037EB4AEC43}
 		{A57EBB30-9D82-4F77-A907-AD22EE5F6D76} = {09630D75-EBA1-431A-B3A3-5037EB4AEC43}
+		{A9C47BA6-8A5D-44DC-AB94-30E3E4F42052} = {09630D75-EBA1-431A-B3A3-5037EB4AEC43}
+		{0F50D394-69B8-4CED-9F24-52EA486331CF} = {09630D75-EBA1-431A-B3A3-5037EB4AEC43}
+		{4EA76C14-F7EE-4715-A1FD-19FC67405B6E} = {09630D75-EBA1-431A-B3A3-5037EB4AEC43}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DF000381-BCAC-43DD-86C9-5D5D6FF7FCE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -72,5 +81,17 @@ Global
 		{A57EBB30-9D82-4F77-A907-AD22EE5F6D76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A57EBB30-9D82-4F77-A907-AD22EE5F6D76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A57EBB30-9D82-4F77-A907-AD22EE5F6D76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9C47BA6-8A5D-44DC-AB94-30E3E4F42052}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9C47BA6-8A5D-44DC-AB94-30E3E4F42052}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9C47BA6-8A5D-44DC-AB94-30E3E4F42052}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9C47BA6-8A5D-44DC-AB94-30E3E4F42052}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F50D394-69B8-4CED-9F24-52EA486331CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F50D394-69B8-4CED-9F24-52EA486331CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F50D394-69B8-4CED-9F24-52EA486331CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F50D394-69B8-4CED-9F24-52EA486331CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EA76C14-F7EE-4715-A1FD-19FC67405B6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EA76C14-F7EE-4715-A1FD-19FC67405B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EA76C14-F7EE-4715-A1FD-19FC67405B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EA76C14-F7EE-4715-A1FD-19FC67405B6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -4,7 +4,7 @@
     container_name: pm.identity
     build:
       context: .
-      dockerfile: src/Services/Identity/PM.Identity/Dockerfile
+      dockerfile: src/Services/Identity/PM.Identity.Presentation/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
