@@ -25,7 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{09
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyCloak.Auth.API", "src\Services\Identity\KeyCloak.Auth.API\KeyCloak.Auth.API.csproj", "{17284A08-A95F-47A9-9B30-974CCB7CDD54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalManager.Identity", "src\Services\Identity\PersonalManager.Identity\PersonalManager.Identity.csproj", "{A57EBB30-9D82-4F77-A907-AD22EE5F6D76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PM.Identity", "src\Services\Identity\PM.Identity\PM.Identity.csproj", "{A57EBB30-9D82-4F77-A907-AD22EE5F6D76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
