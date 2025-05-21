@@ -1,6 +1,20 @@
 ﻿services:
+  users.api:
+    image: users.api
+    container_name: users.api
+    build:
+      context: .
+      dockerfile: src/Services/Identity/PersonalManager.Identity/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+    ports:
+      - "9000:8080"
+      - "9090:8081"
+        
   dtm.api:
     image: dtm.api
+    container_name: dtm.api
     build:
       context: .
       dockerfile: src/Services/DailyTasksManager/DTM.API/Dockerfile
@@ -10,29 +24,25 @@
     ports:
       - "9001:8080"
       - "9091:8081"
-
-  keycloak.auth.api:
-    image: keycloak.auth.api
-    container_name: keycloak.auth.api
-    build:
-      context: .
-      dockerfile: src/Services/Identity/KeyCloak.Auth.API/Dockerfile
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:8080
-    ports:
-      - "9000:8080"
-      - "9090:8081"
         
   keycloak:
     image: quay.io/keycloak/keycloak:latest
-    container_name: keycloak
-    command: start-dev
+    container_name: personalManager.identity
+    command:
+      - start-dev
     environment:
-      - KC_HEALTH_ENABLED=true
-      - KEYCLOAK_ADMIN=admin
-      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+      # Authentication settings
+      - Authentication__Audience=account
+      - Authentication__TokenValidationParameters__ValidIssuers__0=http://users.api:8080/realms/personalManager
+      - Authentication__TokenValidationParameters__ValidIssuers__1=http://localhost:18080/realms/personalManager
+      - Authentication__MetadataAddress=http://users.api:8080/realms/personalManager/.well-known/openid-configuration
+      - Authentication__RequireHttpsMetadata=false
+      # KeyCloak settings
+      - KeyCloak__HealthUrl=http://users.api:8080/health/
     volumes:
-      - ./.containers/identity:/opt/keycloak/data
+      - ./.containers/personalManager/identity:/opt/keycloak/data
+      - ./.files:/opt/keycloak/data/import
     ports:
       - "18080:8080"

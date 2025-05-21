@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{09
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyCloak.Auth.API", "src\Services\Identity\KeyCloak.Auth.API\KeyCloak.Auth.API.csproj", "{17284A08-A95F-47A9-9B30-974CCB7CDD54}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalManager.Identity", "src\Services\Identity\PersonalManager.Identity\PersonalManager.Identity.csproj", "{A57EBB30-9D82-4F77-A907-AD22EE5F6D76}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,7 @@ Global
 		{34B18B4D-9958-4FEA-8CAE-A78E4A7024DC} = {492B8F47-27B3-4E7D-96DE-94825DA8713A}
 		{09630D75-EBA1-431A-B3A3-5037EB4AEC43} = {4ACD44DA-AC01-4189-95AD-6F2933463608}
 		{17284A08-A95F-47A9-9B30-974CCB7CDD54} = {09630D75-EBA1-431A-B3A3-5037EB4AEC43}
+		{A57EBB30-9D82-4F77-A907-AD22EE5F6D76} = {09630D75-EBA1-431A-B3A3-5037EB4AEC43}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DF000381-BCAC-43DD-86C9-5D5D6FF7FCE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -65,5 +68,9 @@ Global
 		{17284A08-A95F-47A9-9B30-974CCB7CDD54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17284A08-A95F-47A9-9B30-974CCB7CDD54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17284A08-A95F-47A9-9B30-974CCB7CDD54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A57EBB30-9D82-4F77-A907-AD22EE5F6D76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A57EBB30-9D82-4F77-A907-AD22EE5F6D76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A57EBB30-9D82-4F77-A907-AD22EE5F6D76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A57EBB30-9D82-4F77-A907-AD22EE5F6D76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
