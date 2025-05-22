@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Common.Messaging;
+namespace PM.Common.Domain;
 
 public interface IDomainEvent : INotification
 {

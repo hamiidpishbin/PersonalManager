@@ -1,6 +1,4 @@
-using Common.Messaging;
-
-namespace Common.Abstractions;
+namespace PM.Common.Domain;
 
 public abstract class Entity(Guid id)
 { 

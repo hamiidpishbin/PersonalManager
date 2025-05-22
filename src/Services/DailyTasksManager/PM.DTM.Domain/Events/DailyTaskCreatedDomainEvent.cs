@@ -1,4 +1,4 @@
-using Common.Messaging;
+using PM.Common.Domain;
 
 namespace PM.DTM.Domain.Events;
 

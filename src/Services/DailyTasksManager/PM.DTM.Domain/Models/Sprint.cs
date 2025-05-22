@@ -1,4 +1,4 @@
-using Common.Abstractions;
+using PM.Common.Domain;
 using PM.DTM.Domain.Events;
 using PM.DTM.Domain.ValueObjects;
 
