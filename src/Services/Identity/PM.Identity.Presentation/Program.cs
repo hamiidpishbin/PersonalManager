@@ -1,3 +1,4 @@
+using PM.Common.Presentation.Endpoints;
 using PM.Identity.Application;
 using PM.Identity.Infrastructure;
 using PM.Identity.Presentation;
@@ -15,5 +16,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
+
+app.MapEndpoints();
+
+app.MapGet("/", () => "Hello World!");
 
 app.Run();
