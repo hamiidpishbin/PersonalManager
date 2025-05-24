@@ -10,6 +10,7 @@ public class RegisterUser : IEndpoint
 			() =>
 			{
 				return Results.Ok("Registered OK.");
-			});
+			})
+			.AllowAnonymous();
 	}
 }
