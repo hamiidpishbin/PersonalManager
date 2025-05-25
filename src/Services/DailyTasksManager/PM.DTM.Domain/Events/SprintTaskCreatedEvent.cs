@@ -2,4 +2,7 @@ using PM.Common.Domain;
 
 namespace PM.DTM.Domain.Events;
 
-public record SprintTaskCreatedEvent(Guid SprintTaskId) : IDomainEvent;
+public class SprintTaskCreatedEvent(Guid sprintTaskId) : DomainEvent
+{
+	public Guid SprintTaskId { get; init; } = sprintTaskId;
+}

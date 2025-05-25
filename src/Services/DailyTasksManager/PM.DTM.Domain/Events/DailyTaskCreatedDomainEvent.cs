@@ -2,4 +2,7 @@ using PM.Common.Domain;
 
 namespace PM.DTM.Domain.Events;
 
-public record DailyTaskCreatedDomainEvent(Guid DailyTaskId) : IDomainEvent;
+public class DailyTaskCreatedDomainEvent(Guid dailyTaskId) : DomainEvent
+{
+	public Guid DailyTaskId { get; init; } = dailyTaskId;
+}
