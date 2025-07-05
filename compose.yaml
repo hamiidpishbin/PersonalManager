@@ -8,6 +8,12 @@
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
+      - KeyCloak__AdminUrl=http://pm.keycloak:8080/admin/realms/personalManager/
+      - KeyCloak__TokenUrl=http://pm.keycloak:8080/realms/personalManager/protocol/openid-connect/token
+      - KeyCloak__ConfidentialClientId=pm-confidential-client
+      - KeyCloak__ConfidentialClientSecret=uhajgkKp47Av70s51FhdZS69w5UOxJqk
+      - KeyCloak__PublicClientId=pm-public-client
+      - ConnectionStrings__Database=Host=pm.identity.db;Port=5432;Database=pm.identity;Username=postgres;Password=postgres;Include Error Detail=true
     ports:
       - "9000:8080"
       - "9090:8081"
@@ -48,3 +54,20 @@
       - ./.files:/opt/keycloak/data/import
     ports:
       - "18080:8080"
+        
+  pm.identity.db:
+    image: postgres:latest
+    container_name: pm.identity.db
+    environment:
+      - POSTGRES_DB=evently
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.containers/db:/var/lib/postgres/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d evently" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5

@@ -81,12 +81,4 @@ public static class ApiResults
 			{ "errors", validationError.Errors }
 		};
 	}
-	
-
-	
-
-	
-
-	
-
 }

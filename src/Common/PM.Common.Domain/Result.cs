@@ -28,11 +28,22 @@ public class Result
 	public static Result<TValue> Failure<TValue>(Error error) => new(default, false, error);
 }
 
-	
 public class Result<TValue>(TValue? value, bool isSuccess, Error error) : Result(isSuccess, error)
 {
 	[NotNull]
 	public TValue Value => IsSuccess
 		? value!
 		: throw new InvalidOperationException("The value of a failure result can't be accessed.");
+	
+	public static implicit operator Result<TValue>(TValue? value)
+	{
+		return value is not null
+			? Success(value)
+			: Failure<TValue>(Error.NullValue);
+	}
+
+	public static Result<TValue> ValidationFailure(Error error)
+	{
+		return new Result<TValue>(default, false, error);
+	}
 }
