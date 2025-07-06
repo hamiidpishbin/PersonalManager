@@ -1,3 +1,4 @@
+using PM.Common.Infrastructure.Logging;
 using PM.Common.Presentation.Endpoints;
 using PM.Identity.Application;
 using PM.Identity.Infrastructure;
@@ -5,6 +6,8 @@ using PM.Identity.Presentation;
 using PM.Identity.Presentation.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseCustomSerilog();
 
 // Add services to the container.
 builder.Services
