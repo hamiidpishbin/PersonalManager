@@ -21,11 +21,6 @@ internal class KeyCloakLoginClient(
 			new("password", request.Password),
 			new("grant_type", "password")
 		};
-		
-		logger.LogInformation(_keyCloakOptions.PublicClientId);
-		logger.LogInformation(_keyCloakOptions.TokenUrl);
-		logger.LogInformation(request.Username);
-		logger.LogInformation(request.Password);
 
 		using var urlEncodedRequestParameters = new FormUrlEncodedContent(requestParameters);
 

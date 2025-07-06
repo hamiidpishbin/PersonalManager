@@ -2,7 +2,7 @@ using System.Net.Http.Json;
 
 namespace PM.Identity.Infrastructure.IdentityProvider;
 
-internal sealed class KeyCloakClient(HttpClient httpClient)
+internal sealed class KeyCloakRegisterClient(HttpClient httpClient)
 {
 	internal async Task<string> RegisterUserAsync(UserRepresentation user, CancellationToken cancellationToken = default)
 	{

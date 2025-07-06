@@ -6,7 +6,7 @@ using PM.Identity.Application.IdentityProvider;
 namespace PM.Identity.Infrastructure.IdentityProvider;
 
 internal sealed class IdentityProviderService(
-	KeyCloakClient keyCloakClient,
+	KeyCloakRegisterClient registerClient,
 	KeyCloakLoginClient loginClient,
 	ILogger<IdentityProviderService> logger) : IIdentityProviderService
 {
@@ -26,7 +26,7 @@ internal sealed class IdentityProviderService(
 
 		try
 		{
-			return await keyCloakClient.RegisterUserAsync(userRepresentation, cancellationToken);
+			return await registerClient.RegisterUserAsync(userRepresentation, cancellationToken);
 		}
 		catch (HttpRequestException exception) when (exception.StatusCode == HttpStatusCode.Conflict)
 		{

@@ -21,7 +21,7 @@ public static class DependencyInjectionExtensions
 		services.AddTransient<KeyCloakAuthDelegatingHandler>();
 
 		services
-			.AddHttpClient<KeyCloakClient>((serviceProvider, httpClient) =>
+			.AddHttpClient<KeyCloakRegisterClient>((serviceProvider, httpClient) =>
 			{
 				var keycloakOptions = serviceProvider.GetRequiredService<IOptions<KeyCloakOptions>>().Value;
 
