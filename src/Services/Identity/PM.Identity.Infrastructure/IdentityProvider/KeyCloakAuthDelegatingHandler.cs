@@ -5,12 +5,9 @@ using Microsoft.Extensions.Options;
 
 namespace PM.Identity.Infrastructure.IdentityProvider;
 
-internal sealed class KeyCloakAuthDelegatingHandler(
-	IOptions<KeyCloakOptions> options,
-	IHttpClientFactory httpClientFactory) : DelegatingHandler
+internal sealed class KeyCloakAuthDelegatingHandler(IOptions<KeyCloakOptions> options) : DelegatingHandler
 {
 	private readonly KeyCloakOptions _options = options.Value;
-	private readonly HttpClient _tokenClient = httpClientFactory.CreateClient("KeycloakTokenClient");
 
 	protected override async Task<HttpResponseMessage> SendAsync(
 		HttpRequestMessage request,

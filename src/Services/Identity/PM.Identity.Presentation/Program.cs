@@ -2,6 +2,7 @@ using PM.Common.Presentation.Endpoints;
 using PM.Identity.Application;
 using PM.Identity.Infrastructure;
 using PM.Identity.Presentation;
+using PM.Identity.Presentation.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,11 @@ builder.Services
 	.AddPresentationServices();
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+	app.ApplyMigrations();
+}
 
 // Configure the HTTP request pipeline.
 
