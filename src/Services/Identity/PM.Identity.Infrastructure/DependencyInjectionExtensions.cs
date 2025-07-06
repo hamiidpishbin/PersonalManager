@@ -29,6 +29,8 @@ public static class DependencyInjectionExtensions
 			})
 			.AddHttpMessageHandler<KeyCloakAuthDelegatingHandler>();
 
+		services.AddHttpClient<KeyCloakLoginClient>();
+
 		services.AddTransient<IIdentityProviderService, IdentityProviderService>();
 		
 		services.AddDbContext<UsersDbContext>(options =>

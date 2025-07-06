@@ -5,7 +5,10 @@ using PM.Identity.Application.IdentityProvider;
 
 namespace PM.Identity.Infrastructure.IdentityProvider;
 
-internal sealed class IdentityProviderService(KeyCloakClient keyCloakClient, ILogger<IdentityProviderService> logger) : IIdentityProviderService
+internal sealed class IdentityProviderService(
+	KeyCloakClient keyCloakClient,
+	KeyCloakLoginClient loginClient,
+	ILogger<IdentityProviderService> logger) : IIdentityProviderService
 {
 	private const string PasswordCredentialType = "Password";
 
@@ -31,5 +34,12 @@ internal sealed class IdentityProviderService(KeyCloakClient keyCloakClient, ILo
 
 			return Result.Failure<string>(IdentityProviderErrors.EmailIsNotUnique);
 		}
+	}
+
+	public async Task<Result<UserTokenResponse>> LoginAsync(UserTokenRequest request, CancellationToken cancellationToken = default)
+	{
+		var tokenRequest = new TokenRequest(request.Username, request.Password);
+		
+		return await loginClient.LoginAsync(tokenRequest, cancellationToken);
 	}
 }
