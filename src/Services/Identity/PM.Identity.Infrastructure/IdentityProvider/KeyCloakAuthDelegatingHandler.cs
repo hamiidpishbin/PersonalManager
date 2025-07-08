@@ -19,8 +19,15 @@ internal sealed class KeyCloakAuthDelegatingHandler(IOptions<KeyCloakOptions> op
 
 		var httpResponseMessage = await base.SendAsync(request, cancellationToken);
 
-		httpResponseMessage.EnsureSuccessStatusCode();
+		// httpResponseMessage.EnsureSuccessStatusCode();
 
+		if (!httpResponseMessage.IsSuccessStatusCode)
+		{
+			var error = await httpResponseMessage.Content.ReadAsStringAsync(cancellationToken);
+
+			throw new Exception(error);
+		}
+		
 		return httpResponseMessage;
 	}
 
@@ -42,8 +49,15 @@ internal sealed class KeyCloakAuthDelegatingHandler(IOptions<KeyCloakOptions> op
 
 		using var authorizationResponse = await base.SendAsync(authRequest, cancellationToken);
 		
-		authorizationResponse.EnsureSuccessStatusCode();
+		// authorizationResponse.EnsureSuccessStatusCode();
 
+		if (!authorizationResponse.IsSuccessStatusCode)
+		{
+			var error = await authorizationResponse.Content.ReadAsStringAsync(cancellationToken);
+
+			throw new Exception(error);
+		}
+		
 		return await authorizationResponse.Content.ReadFromJsonAsync<AuthToken>(cancellationToken);
 	}
 

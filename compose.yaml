@@ -11,7 +11,7 @@
       - KeyCloak__AdminUrl=http://pm.keycloak:8080/admin/realms/personalManager/
       - KeyCloak__TokenUrl=http://pm.keycloak:8080/realms/personalManager/protocol/openid-connect/token
       - KeyCloak__ConfidentialClientId=pm-confidential-client
-      - KeyCloak__ConfidentialClientSecret=uhajgkKp47Av70s51FhdZS69w5UOxJqk
+      - KeyCloak__ConfidentialClientSecret=dgap9Xae2Neexig7OUntaTrXBrpEqGY8
       - KeyCloak__PublicClientId=pm-public-client
       - ConnectionStrings__Database=Host=pm.identity.db;Port=5432;Database=pm.identity;Username=postgres;Password=postgres;Include Error Detail=true
     ports:
@@ -50,11 +50,20 @@
       - Authentication__RequireHttpsMetadata=false
       # KeyCloak settings
       - KeyCloak__HealthUrl=http://pm.identity:8080/health/
+      # PostgreSQL settings
+      - KC_DB=postgres
+      - KC_DB_URL_HOST=pm.identity.db
+      - KC_DB_URL_PORT=5432
+      - KC_DB_URL_DATABASE=pm.identity
+      - KC_DB_USERNAME=postgres
+      - KC_DB_PASSWORD=postgres
     volumes:
       - ./.containers/personalManager/identity:/opt/keycloak/data
       - ./.files:/opt/keycloak/data/import
     ports:
       - "18080:8080"
+    depends_on:
+      - pm.identity.db
         
   pm.elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.11.3
@@ -80,7 +89,7 @@
     image: postgres:latest
     container_name: pm.identity.db
     environment:
-      - POSTGRES_DB=evently
+      - POSTGRES_DB=pm.identity
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
