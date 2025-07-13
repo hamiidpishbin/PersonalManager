@@ -7,7 +7,6 @@ namespace PM.Identity.Presentation.Users.LoginUser;
 
 public class LoginUser : IEndpoint
 {
-
 	public void MapEndpoint(IEndpointRouteBuilder app)
 	{
 		app.MapPost("users/login",

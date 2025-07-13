@@ -18,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Common\PM.Common.Presentation\PM.Common.Presentation.csproj" />
       <ProjectReference Include="..\PM.DTM.Application\PM.DTM.Application.csproj" />
       <ProjectReference Include="..\PM.DTM.Domain\PM.DTM.Domain.csproj" />
       <ProjectReference Include="..\PM.DTM.Infrastructure\PM.DTM.Infrastructure.csproj" />
