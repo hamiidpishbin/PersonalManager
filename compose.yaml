@@ -1,38 +1,106 @@
 ﻿services:
-  dtm.api:
-    image: dtm.api
+  pm.identity:
+    image: pm.identity
+    container_name: pm.identity
     build:
       context: .
-      dockerfile: src/Services/DailyTasksManager/DTM.API/Dockerfile
+      dockerfile: src/Services/Identity/PM.Identity.Presentation/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - KeyCloak__AdminUrl=http://pm.keycloak:8080/admin/realms/personalManager/
+      - KeyCloak__TokenUrl=http://pm.keycloak:8080/realms/personalManager/protocol/openid-connect/token
+      - KeyCloak__ConfidentialClientId=pm-confidential-client
+      - KeyCloak__ConfidentialClientSecret=dgap9Xae2Neexig7OUntaTrXBrpEqGY8
+      - KeyCloak__PublicClientId=pm-public-client
+      - ConnectionStrings__Database=Host=pm.identity.db;Port=5432;Database=pm.identity;Username=postgres;Password=postgres;Include Error Detail=true
+    ports:
+      - "9000:8080"
+      - "9090:8081"
+    depends_on:
+      - pm.keycloak
+      - pm.identity.db
+        
+  pm.dtm.api:
+    image: pm.dtm.api
+    container_name: pm.dtm.api
+    build:
+      context: .
+      dockerfile: src/Services/DailyTasksManager/PM.DTM.API/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
     ports:
       - "9001:8080"
       - "9091:8081"
-
-  keycloak.auth.api:
-    image: keycloak.auth.api
-    container_name: keycloak.auth.api
-    build:
-      context: .
-      dockerfile: src/Services/Identity/KeyCloak.Auth.API/Dockerfile
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:8080
-    ports:
-      - "9000:8080"
-      - "9090:8081"
         
-  keycloak:
+  pm.keycloak:
     image: quay.io/keycloak/keycloak:latest
-    container_name: keycloak
-    command: start-dev
+    container_name: pm.keycloak
+    command:
+      - start-dev
     environment:
-      - KC_HEALTH_ENABLED=true
-      - KEYCLOAK_ADMIN=admin
-      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+      # Authentication settings
+      - Authentication__Audience=account
+      - Authentication__TokenValidationParameters__ValidIssuers__0=http://pm.identity:8080/realms/personalManager
+      - Authentication__TokenValidationParameters__ValidIssuers__1=http://localhost:18080/realms/personalManager
+      - Authentication__MetadataAddress=http://pm.identity:8080/realms/personalManager/.well-known/openid-configuration
+      - Authentication__RequireHttpsMetadata=false
+      # KeyCloak settings
+      - KeyCloak__HealthUrl=http://pm.identity:8080/health/
+      # PostgreSQL settings
+      - KC_DB=postgres
+      - KC_DB_URL_HOST=pm.identity.db
+      - KC_DB_URL_PORT=5432
+      - KC_DB_URL_DATABASE=pm.identity
+      - KC_DB_USERNAME=postgres
+      - KC_DB_PASSWORD=postgres
     volumes:
-      - ./.containers/identity:/opt/keycloak/data
+      - ./.containers/personalManager/identity:/opt/keycloak/data
+      - ./.files:/opt/keycloak/data/import
     ports:
       - "18080:8080"
+    depends_on:
+      - pm.identity.db
+        
+  pm.elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.3
+    container_name: pm.elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+        
+  pm.kibana:
+    image: docker.elastic.co/kibana/kibana:8.11.3
+    container_name: pm.kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://pm.elasticsearch:9200
+    ports:
+      - "5601:5601"
+  
+  pm.identity.db:
+    image: postgres:latest
+    container_name: pm.identity.db
+    environment:
+      - POSTGRES_DB=pm.identity
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.containers/db:/var/lib/postgres/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d evently" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      
+volumes:
+  elasticsearch-data:

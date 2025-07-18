@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\..\..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Common\PM.Common.Presentation\PM.Common.Presentation.csproj" />
+      <ProjectReference Include="..\PM.DTM.Application\PM.DTM.Application.csproj" />
+      <ProjectReference Include="..\PM.DTM.Domain\PM.DTM.Domain.csproj" />
+      <ProjectReference Include="..\PM.DTM.Infrastructure\PM.DTM.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>
