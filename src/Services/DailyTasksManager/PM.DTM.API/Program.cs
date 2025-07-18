@@ -1,5 +1,4 @@
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
+using PM.Common.Presentation.Endpoints;
 using PM.DTM.API;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,4 +11,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapEndpoints();
+
 app.Run();
