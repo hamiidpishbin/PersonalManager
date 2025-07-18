@@ -5,9 +5,9 @@ namespace PM.DTM.API;
 
 public static class DependencyInjectionExtensions
 {
-	public static IServiceCollection AddPresentationServices(this IServiceCollection services)
+	public static IServiceCollection AddPresentationServices(this IServiceCollection services, IConfiguration configuration)
 	{
-		services.AddCustomAuthServices();
+		services.AddCustomAuthServices(configuration);
 		
 		services.AddEndpointsFromAssembly(AssemblyReference.Assembly);
 

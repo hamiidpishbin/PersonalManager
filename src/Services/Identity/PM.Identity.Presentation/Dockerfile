@@ -27,4 +27,5 @@ RUN dotnet publish "PM.Identity.Presentation.csproj" -c $BUILD_CONFIGURATION -o 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+ENV ASPNETCORE_ENVIRONMENT=Docker
 ENTRYPOINT ["dotnet", "PM.Identity.Presentation.dll"]

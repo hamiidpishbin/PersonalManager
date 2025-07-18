@@ -11,7 +11,7 @@ COPY ["src/Services/DailyTasksManager/PM.DTM.API/PM.DTM.API.csproj", "src/Servic
 COPY ["src/Services/DailyTasksManager/PM.DTM.Application/PM.DTM.Application.csproj", "src/Services/DailyTasksManager/PM.DTM.Application/"]
 COPY ["src/Services/DailyTasksManager/PM.DTM.Infrastructure/PM.DTM.Infrastructure.csproj", "src/Services/DailyTasksManager/PM.DTM.Infrastructure/"]
 COPY ["src/Services/DailyTasksManager/PM.DTM.Domain/PM.DTM.Domain.csproj", "src/Services/DailyTasksManager/PM.DTM.Domain/"]
-COPY ["src/Common/PM.Common.Presentation/PM.Common.Presentation.csproj", "src/Common/PM.Common.Presentation/"]
+#COPY ["src/Common/PM.Common.Presentation/PM.Common.Presentation.csproj", "src/Common/PM.Common.Presentation/"]
 COPY ["src/Common/PM.Common.Application/PM.Common.Application.csproj", "src/Common/PM.Common.Application/"]
 COPY ["src/Common/PM.Common.Domain/PM.Common.Domain.csproj", "src/Common/PM.Common.Domain/"]
 COPY ["src/Common/PM.Common.Infrastructure/PM.Common.Infrastructure.csproj", "src/Common/PM.Common.Infrastructure/"]
@@ -27,4 +27,5 @@ RUN dotnet publish "PM.DTM.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+ENV ASPNETCORE_ENVIRONMENT=Docker
 ENTRYPOINT ["dotnet", "PM.DTM.API.dll"]

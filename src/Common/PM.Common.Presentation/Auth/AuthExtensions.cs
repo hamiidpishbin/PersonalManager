@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
@@ -8,23 +9,26 @@ namespace PM.Common.Presentation.Auth;
 
 public static class AuthExtensions
 {
-    public static IServiceCollection AddCustomAuthServices(this IServiceCollection services)
+    public static IServiceCollection AddCustomAuthServices(this IServiceCollection services, IConfiguration configuration)
     {
+        var jwtOptions = configuration.GetSection("JwtOptions").Get<JwtOptionsConfig>()
+                         ?? throw new InvalidOperationException("JwtOptions section is missing or malformed.");
+ 
         services.AddScoped<IClaimsTransformation, KeycloakClaimsTransformer>();
         
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
-                options.Authority = "http://localhost:18080/realms/personalManager";
-                options.Audience = "pm-confidential-client";
-                options.RequireHttpsMetadata = false;
+                options.Authority = jwtOptions.Authority;
+                options.Audience = jwtOptions.Audience;
+                options.RequireHttpsMetadata = jwtOptions.RequireHttpsMetadata;
                 
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuer = true,
-                    ValidIssuer = "http://pm.keycloak:8080/realms/personalManager",
-                    ValidateAudience = true,
-                    ValidAudience = "pm-confidential-client"
+                    ValidateIssuer = jwtOptions.TokenValidationParameters.ValidateIssuer,
+                    ValidIssuer = jwtOptions.TokenValidationParameters.ValidIssuer,
+                    ValidateAudience = jwtOptions.TokenValidationParameters.ValidateAudience,
+                    ValidAudience = jwtOptions.TokenValidationParameters.ValidAudience
                 };
             });
 

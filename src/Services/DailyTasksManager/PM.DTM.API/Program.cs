@@ -4,7 +4,7 @@ using PM.DTM.API;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddPresentationServices();
+builder.Services.AddPresentationServices(builder.Configuration);
 	
 var app = builder.Build();
 
