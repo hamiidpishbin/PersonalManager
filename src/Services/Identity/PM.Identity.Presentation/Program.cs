@@ -1,5 +1,6 @@
 using PM.Common.Infrastructure.Logging;
 using PM.Common.Presentation.Endpoints;
+using PM.Common.Presentation.Exceptions;
 using PM.Identity.Application;
 using PM.Identity.Infrastructure;
 using PM.Identity.Presentation;
@@ -15,8 +16,11 @@ if (builder.Environment.IsEnvironment("Docker"))
 }
 
 // Add services to the container.
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 builder.Services
-	.AddApplicationServices()
+	.AddApplicationServices(typeof(AssemblyReference).Assembly)
 	.AddInfrastructureServices(builder.Configuration)
 	.AddPresentationServices();
 
@@ -28,8 +32,10 @@ if (app.Environment.IsDevelopment())
 }
 
 // Configure the HTTP request pipeline.
+app.UseExceptionHandler();
 
-app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapEndpoints();
 

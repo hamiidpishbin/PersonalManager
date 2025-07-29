@@ -11,7 +11,7 @@ COPY ["src/Services/Identity/PM.Identity.Presentation/PM.Identity.Presentation.c
 COPY ["src/Services/Identity/PM.Identity.Application/PM.Identity.Application.csproj", "src/Services/Identity/PM.Identity.Application/"]
 COPY ["src/Services/Identity/PM.Identity.Infrastructure/PM.Identity.Infrastructure.csproj", "src/Services/Identity/PM.Identity.Infrastructure/"]
 COPY ["src/Services/Identity/PM.Identity.Domain/PM.Identity.Domain.csproj", "src/Services/Identity/PM.Identity.Domain/"]
-COPY ["src/Common/PM.Common.Presentation/PM.Common.Presentation.csproj", "src/Common/PM.Common.Presentation/"]
+#COPY ["src/Common/PM.Common.Presentation/PM.Common.Presentation.csproj", "src/Common/PM.Common.Presentation/"]
 COPY ["src/Common/PM.Common.Application/PM.Common.Application.csproj", "src/Common/PM.Common.Application/"]
 COPY ["src/Common/PM.Common.Domain/PM.Common.Domain.csproj", "src/Common/PM.Common.Domain/"]
 COPY ["src/Common/PM.Common.Infrastructure/PM.Common.Infrastructure.csproj", "src/Common/PM.Common.Infrastructure/"]
