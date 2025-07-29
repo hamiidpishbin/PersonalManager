@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace PM.Common.Presentation.Auth;
@@ -26,6 +27,7 @@ public static class AuthExtensions
                     ValidateAudience = true,
                     ValidAudience = "pm-confidential-client"
                 };
+                options.EventsType = typeof(AuthExceptionLoggingEvents);
             });
 
         var authPolicyBuilder = new AuthorizationPolicyBuilder()
