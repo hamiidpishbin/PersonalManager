@@ -27,34 +27,7 @@ public static class AuthExtensions
                     ValidateAudience = true,
                     ValidAudience = "pm-confidential-client"
                 };
-
-                // ToDo: The two following events should be moved into a AuthExceptionLoggingMiddleware so it can be used in Register and Login APIs
-                // Currently, the adding of app.UseAuthentication to the Program.cs of pm.identity has caused unhandled situations and they do not need to be there 
-                // After that, should proceed with testing the addition of Docker environment in the other existing branch
-                options.Events = new JwtBearerEvents
-                {
-                    OnAuthenticationFailed = (context) =>
-                    {
-                        var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<JwtBearerEvents>>();
-                        
-                        logger.LogError(context.Exception, "Authentication failed for path {Path}. reason: {Message}",
-                            context.Request.Path,
-                            context.Exception.Message);
-                        
-                        return Task.CompletedTask;
-                    },
-                    OnChallenge = (context) =>
-                    {
-                        var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<JwtBearerEvents>>();
-                        
-                        logger.LogError("Authentication failed for path {Path}. Error: {Error}. Decsription: {Description}", 
-                            context.Request.Path,
-                            context.Error,
-                            context.ErrorDescription);
-                        
-                        return Task.CompletedTask;
-                    }
-                };
+                options.EventsType = typeof(AuthExceptionLoggingEvents);
             });
 
         var authPolicyBuilder = new AuthorizationPolicyBuilder()

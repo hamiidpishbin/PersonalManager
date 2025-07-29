@@ -1,11 +1,12 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace PM.Identity.Infrastructure.IdentityProvider;
 
-internal sealed class KeyCloakAuthDelegatingHandler(IOptions<KeyCloakOptions> options) : DelegatingHandler
+internal sealed class KeyCloakAuthDelegatingHandler(IOptions<KeyCloakOptions> options, ILogger<KeyCloakAuthDelegatingHandler> logger) : DelegatingHandler
 {
 	private readonly KeyCloakOptions _options = options.Value;
 
@@ -13,25 +14,31 @@ internal sealed class KeyCloakAuthDelegatingHandler(IOptions<KeyCloakOptions> op
 		HttpRequestMessage request,
 		CancellationToken cancellationToken)
 	{
-		var authorizationToken = await GetAuthorizationToken(cancellationToken);
+		var authToken = await GetAuthorizationToken(cancellationToken);
 
-		request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authorizationToken.AccessToken);
+		if (authToken is null)
+		{
+			const string authTokenError = "Auth token cannot be null when registering a user";
+			
+			logger.LogError(authTokenError);
+			
+			throw new InvalidOperationException(authTokenError);
+		}
+
+		request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authToken.AccessToken);
 
 		var httpResponseMessage = await base.SendAsync(request, cancellationToken);
 
-		// httpResponseMessage.EnsureSuccessStatusCode();
-
-		if (!httpResponseMessage.IsSuccessStatusCode)
-		{
-			var error = await httpResponseMessage.Content.ReadAsStringAsync(cancellationToken);
-
-			throw new Exception(error);
-		}
+		if (httpResponseMessage.IsSuccessStatusCode) return httpResponseMessage;
 		
-		return httpResponseMessage;
+		var error = await httpResponseMessage.Content.ReadAsStringAsync(cancellationToken);
+		
+		logger.LogError("Error in sending user register request to KeyCloak: {Error}", error);
+
+		throw new Exception($"Error in sending user register request to KeyCloak: {error}");
 	}
 
-	private async Task<AuthToken> GetAuthorizationToken(CancellationToken cancellationToken)
+	private async Task<AuthToken?> GetAuthorizationToken(CancellationToken cancellationToken)
 	{
 		var authRequestParameters = new KeyValuePair<string, string>[]
 		{
@@ -49,13 +56,13 @@ internal sealed class KeyCloakAuthDelegatingHandler(IOptions<KeyCloakOptions> op
 
 		using var authorizationResponse = await base.SendAsync(authRequest, cancellationToken);
 		
-		// authorizationResponse.EnsureSuccessStatusCode();
-
 		if (!authorizationResponse.IsSuccessStatusCode)
 		{
 			var error = await authorizationResponse.Content.ReadAsStringAsync(cancellationToken);
+			
+			logger.LogError("Error in Getting Authorization Token: {Error}", error);
 
-			throw new Exception(error);
+			throw new Exception($"Error in Getting Authorization Token: {error}");
 		}
 		
 		return await authorizationResponse.Content.ReadFromJsonAsync<AuthToken>(cancellationToken);
