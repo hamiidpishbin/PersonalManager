@@ -23,14 +23,6 @@ public static class AuthExtensions
                 options.Authority = jwtOptions.Authority;
                 options.Audience = jwtOptions.Audience;
                 options.RequireHttpsMetadata = jwtOptions.RequireHttpsMetadata;
-                
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = jwtOptions.TokenValidationParameters.ValidateIssuer,
-                    ValidIssuer = jwtOptions.TokenValidationParameters.ValidIssuer,
-                    ValidateAudience = jwtOptions.TokenValidationParameters.ValidateAudience,
-                    ValidAudience = jwtOptions.TokenValidationParameters.ValidAudience
-                };
                 options.EventsType = typeof(AuthExceptionLoggingEvents);
             });
 
