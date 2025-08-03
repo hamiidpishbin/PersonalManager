@@ -20,9 +20,12 @@ builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
 builder.Services
-	.AddApplicationServices(typeof(AssemblyReference).Assembly)
+	.AddApplicationServices()
 	.AddInfrastructureServices(builder.Configuration)
 	.AddPresentationServices();
+
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 

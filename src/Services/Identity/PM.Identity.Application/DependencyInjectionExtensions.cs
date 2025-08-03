@@ -6,9 +6,9 @@ namespace PM.Identity.Application;
 
 public static class DependencyInjectionExtensions
 {
-	public static IServiceCollection AddApplicationServices(this IServiceCollection services, Assembly assembly)
+	public static IServiceCollection AddApplicationServices(this IServiceCollection services)
 	{
-		services.AddMediatRAndOpenBehaviors(assembly);
+		services.AddMediatRAndOpenBehaviors(typeof(AssemblyReference).Assembly);
 		
 		return services;
 	}
