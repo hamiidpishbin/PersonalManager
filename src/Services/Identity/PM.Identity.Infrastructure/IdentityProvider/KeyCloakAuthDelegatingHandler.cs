@@ -29,13 +29,9 @@ internal sealed class KeyCloakAuthDelegatingHandler(IOptions<KeyCloakOptions> op
 
 		var httpResponseMessage = await base.SendAsync(request, cancellationToken);
 
-		if (httpResponseMessage.IsSuccessStatusCode) return httpResponseMessage;
-		
-		var error = await httpResponseMessage.Content.ReadAsStringAsync(cancellationToken);
-		
-		logger.LogError("Error in sending user register request to KeyCloak: {Error}", error);
+		httpResponseMessage.EnsureSuccessStatusCode();
 
-		throw new Exception($"Error in sending user register request to KeyCloak: {error}");
+		return httpResponseMessage;
 	}
 
 	private async Task<AuthToken?> GetAuthorizationToken(CancellationToken cancellationToken)
@@ -55,15 +51,8 @@ internal sealed class KeyCloakAuthDelegatingHandler(IOptions<KeyCloakOptions> op
 		authRequest.Content = authRequestContent;
 
 		using var authorizationResponse = await base.SendAsync(authRequest, cancellationToken);
-		
-		if (!authorizationResponse.IsSuccessStatusCode)
-		{
-			var error = await authorizationResponse.Content.ReadAsStringAsync(cancellationToken);
-			
-			logger.LogError("Error in Getting Authorization Token: {Error}", error);
 
-			throw new Exception($"Error in Getting Authorization Token: {error}");
-		}
+		authorizationResponse.EnsureSuccessStatusCode();
 		
 		return await authorizationResponse.Content.ReadFromJsonAsync<AuthToken>(cancellationToken);
 	}

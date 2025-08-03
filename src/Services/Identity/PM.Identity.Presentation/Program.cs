@@ -10,14 +10,22 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseCustomSerilog();
 
+if (builder.Environment.IsEnvironment("Docker"))
+{
+	
+}
+
 // Add services to the container.
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
 builder.Services
-	.AddApplicationServices(typeof(AssemblyReference).Assembly)
+	.AddApplicationServices()
 	.AddInfrastructureServices(builder.Configuration)
 	.AddPresentationServices();
+
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 

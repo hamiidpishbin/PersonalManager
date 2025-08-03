@@ -6,14 +6,7 @@
       context: .
       dockerfile: src/Services/Identity/PM.Identity.Presentation/Dockerfile
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
-      - KeyCloak__AdminUrl=http://pm.keycloak:8080/admin/realms/personalManager/
-      - KeyCloak__TokenUrl=http://pm.keycloak:8080/realms/personalManager/protocol/openid-connect/token
-      - KeyCloak__ConfidentialClientId=pm-confidential-client
-      - KeyCloak__ConfidentialClientSecret=dgap9Xae2Neexig7OUntaTrXBrpEqGY8
-      - KeyCloak__PublicClientId=pm-public-client
-      - ConnectionStrings__Database=Host=pm.identity.db;Port=5432;Database=pm.identity;Username=postgres;Password=postgres;Include Error Detail=true
     ports:
       - "9000:8080"
       - "9090:8081"
@@ -28,7 +21,6 @@
       context: .
       dockerfile: src/Services/DailyTasksManager/PM.DTM.API/Dockerfile
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
     ports:
       - "9001:8080"
@@ -42,14 +34,6 @@
     environment:
       - KC_BOOTSTRAP_ADMIN_USERNAME=admin
       - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
-      # Authentication settings
-      - Authentication__Audience=account
-      - Authentication__TokenValidationParameters__ValidIssuers__0=http://pm.identity:8080/realms/personalManager
-      - Authentication__TokenValidationParameters__ValidIssuers__1=http://localhost:18080/realms/personalManager
-      - Authentication__MetadataAddress=http://pm.identity:8080/realms/personalManager/.well-known/openid-configuration
-      - Authentication__RequireHttpsMetadata=false
-      # KeyCloak settings
-      - KeyCloak__HealthUrl=http://pm.identity:8080/health/
       # PostgreSQL settings
       - KC_DB=postgres
       - KC_DB_URL_HOST=pm.identity.db
