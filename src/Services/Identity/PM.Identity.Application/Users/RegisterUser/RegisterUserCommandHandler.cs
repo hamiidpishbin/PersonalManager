@@ -7,9 +7,7 @@ using PM.Identity.Domain.Users;
 namespace PM.Identity.Application.Users.RegisterUser;
 
 internal sealed class RegisterUserCommandHandler(
-	IIdentityProviderService identityProviderService,
-	IUserRepository userRepository,
-	IUnitOfWork unitOfWork)
+	IIdentityProviderService identityProviderService)
 	: ICommandHandler<RegisterUserCommand, Guid>
 {
 	public async Task<Result<Guid>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
@@ -22,17 +20,8 @@ internal sealed class RegisterUserCommandHandler(
 		
 		var result = await identityProviderService.RegisterUserAsync(newUser, cancellationToken);
 		
-		if (result.IsFailure)
-		{
-			return Result.Failure<Guid>(result.Error);
-		}
-
-		var user = User.Create(request.Email, request.FirstName, request.LastName, result.Value);
-
-		userRepository.Insert(user);
-
-		await unitOfWork.SaveChangesAsync(cancellationToken);
-
-		return user.Id;
+		return result.IsSuccess
+			? Guid.Parse(result.Value)
+			: Result.Failure<Guid>(result.Error);
 	}
 }

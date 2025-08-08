@@ -26,29 +26,6 @@
       - "9001:8080"
       - "9091:8081"
         
-  pm.keycloak:
-    image: quay.io/keycloak/keycloak:latest
-    container_name: pm.keycloak
-    command:
-      - start-dev
-    environment:
-      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
-      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
-      # PostgreSQL settings
-      - KC_DB=postgres
-      - KC_DB_URL_HOST=pm.identity.db
-      - KC_DB_URL_PORT=5432
-      - KC_DB_URL_DATABASE=pm.identity
-      - KC_DB_USERNAME=postgres
-      - KC_DB_PASSWORD=postgres
-    volumes:
-      - ./.containers/personalManager/identity:/opt/keycloak/data
-      - ./.files:/opt/keycloak/data/import
-    ports:
-      - "18080:8080"
-    depends_on:
-      - pm.identity.db
-        
   pm.elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.11.3
     container_name: pm.elasticsearch
@@ -69,6 +46,27 @@
     ports:
       - "5601:5601"
   
+  pm.keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: pm.keycloak
+    command:
+      - start-dev
+    environment:
+      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+      - KC_DB=postgres
+      - KC_DB_URL_HOST=pm.identity.db
+      - KC_DB_URL_PORT=5432
+      - KC_DB_URL_DATABASE=pm.identity
+      - KC_DB_USERNAME=postgres
+      - KC_DB_PASSWORD=postgres
+#    volumes:
+#      - ./realm-export.json:/opt/keycloak/data/import/realm-export.json
+    ports:
+      - "18080:8080"
+    depends_on:
+      - pm.identity.db
+  
   pm.identity.db:
     image: postgres:latest
     container_name: pm.identity.db
@@ -79,12 +77,12 @@
     ports:
       - "5432:5432"
     volumes:
-      - ./.containers/db:/var/lib/postgres/data
+      - ./kc-data:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres -d evently" ]
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d pm.identity" ]
       interval: 5s
       timeout: 5s
       retries: 5
-      
+
 volumes:
   elasticsearch-data:
