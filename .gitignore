@@ -4,3 +4,7 @@ obj/
 riderModule.iml
 /_ReSharper.Caches/
 .containers
+kc-data/
+.files/
+PersonalManager.sln.DotSettings.user
+.idea/
