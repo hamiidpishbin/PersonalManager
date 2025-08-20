@@ -1,7 +1,7 @@
 using PM.Common.Presentation.Auth;
 using PM.Common.Presentation.Endpoints;
 
-namespace PM.DTM.API;
+namespace PM.DTM.Presentation;
 
 public static class DependencyInjectionExtensions
 {

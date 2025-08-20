@@ -1,6 +1,6 @@
 using PM.Common.Presentation.Endpoints;
 
-namespace PM.DTM.API.TestAPIs;
+namespace PM.DTM.Presentation.TestAPIs;
 
 public class NoAuthTest : IEndpoint
 {

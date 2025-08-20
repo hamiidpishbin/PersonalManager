@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace PM.DTM.API;
+namespace PM.DTM.Presentation;
 
 public class AssemblyReference
 {

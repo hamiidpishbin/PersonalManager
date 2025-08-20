@@ -19,7 +19,7 @@
     container_name: pm.dtm.api
     build:
       context: .
-      dockerfile: src/Services/DailyTasksManager/PM.DTM.API/Dockerfile
+      dockerfile: src/Services/DailyTasksManager/PM.DTM.Presentation/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://+:8080
     ports:
@@ -60,8 +60,6 @@
       - KC_DB_URL_DATABASE=pm.identity
       - KC_DB_USERNAME=postgres
       - KC_DB_PASSWORD=postgres
-#    volumes:
-#      - ./realm-export.json:/opt/keycloak/data/import/realm-export.json
     ports:
       - "18080:8080"
     depends_on:
