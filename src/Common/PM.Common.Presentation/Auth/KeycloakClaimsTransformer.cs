@@ -9,12 +9,12 @@ public class KeycloakClaimsTransformer : IClaimsTransformation
 	public Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
 	{
 		var identity = (ClaimsIdentity?)principal.Identity;
-
+		
 		// Avoid adding roles multiple times
 		if (identity == null || identity.HasClaim("transformed", "true")) return Task.FromResult(principal);
-
+		
 		var resourceAccessClaim = identity.FindFirst("resource_access")?.Value;
-
+		
 		if (!string.IsNullOrEmpty(resourceAccessClaim))
 		{
 			using var doc = JsonDocument.Parse(resourceAccessClaim);
@@ -35,10 +35,10 @@ public class KeycloakClaimsTransformer : IClaimsTransformation
 				}
 			}
 		}
-
+		
 		// Prevent duplicate transformation
 		identity.AddClaim(new Claim("transformed", "true"));
-
+		
 		return Task.FromResult(principal);
 	}
 }

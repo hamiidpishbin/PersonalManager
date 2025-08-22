@@ -7,7 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Common\PM.Common.Application\PM.Common.Application.csproj" />
       <ProjectReference Include="..\PM.DTM.Domain\PM.DTM.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="12.0.0" />
+      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
     </ItemGroup>
 
 </Project>

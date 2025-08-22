@@ -1,5 +1,6 @@
 using PM.Common.Presentation.Endpoints;
 using PM.Common.Presentation.Exceptions;
+using PM.DTM.Application.Extensions;
 using PM.DTM.Infrastructure;
 using PM.DTM.Presentation;
 using PM.DTM.Presentation.Extensions;
@@ -11,8 +12,9 @@ builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
 builder.Services
-	.AddPresentationServices(builder.Configuration)
-	.AddInfrastructureServices(builder.Configuration);
+	.AddApplicationServices()
+	.AddInfrastructureServices(builder.Configuration)
+	.AddPresentationServices(builder.Configuration);
 	
 var app = builder.Build();
 
