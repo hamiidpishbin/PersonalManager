@@ -15,7 +15,6 @@ public static class AuthExtensions
         var jwtOptions = configuration.GetSection("JwtOptions").Get<JwtOptionsConfig>()
                          ?? throw new InvalidOperationException("JwtOptions section is missing or malformed.");
  
-        services.AddScoped<IClaimsTransformation, KeycloakClaimsTransformer>();
         services.AddScoped<AuthExceptionLoggingEvents>();
         
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
