@@ -1,8 +1,8 @@
 namespace PM.Common.Domain;
 
-public abstract class Entity()
+public abstract class Entity<TId>
 {
-	public Guid Id { get; set; } = Guid.NewGuid();
+	public required TId Id { get; set; }
 	public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 	public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 	
@@ -22,4 +22,9 @@ public abstract class Entity()
 	{
 		_domainEvents.Add(domainEvent); 
 	}
+}
+
+public abstract class Entity : Entity<Guid> 
+{
+
 }

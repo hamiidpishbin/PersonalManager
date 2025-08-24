@@ -4,7 +4,6 @@ namespace PM.Identity.Domain.Users;
 
 public sealed class User : Entity
 {
-	public Guid Id { get; private set; }
 	public string Email { get; private set; } = null!;
 	public string Password { get; private set; } = null!;
 	public string FirstName { get; private set; } = null!;
