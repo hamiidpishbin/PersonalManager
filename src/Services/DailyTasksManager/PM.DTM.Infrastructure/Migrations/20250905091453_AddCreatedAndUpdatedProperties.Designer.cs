@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PM.DTM.Infrastructure.Data;
@@ -11,9 +12,11 @@ using PM.DTM.Infrastructure.Data;
 namespace PM.DTM.Infrastructure.Migrations
 {
     [DbContext(typeof(DTMDbContext))]
-    partial class DTMDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250905091453_AddCreatedAndUpdatedProperties")]
+    partial class AddCreatedAndUpdatedProperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

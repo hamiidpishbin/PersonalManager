@@ -1,19 +1,26 @@
 using PM.Common.Application.Abstractions.Authentication;
 using PM.Common.Application.Messaging;
 using PM.Common.Domain;
+using PM.DTM.Application.Abstractions.Data;
+using PM.DTM.Application.Abstractions.Repositories;
 using PM.DTM.Domain.Models.Sprints;
 
 namespace PM.DTM.Application.Sprints.Add;
 
-public class AddSprintCommandHandler(IUserContext userContext) : ICommandHandler<AddSprintCommand>
+public class AddSprintCommandHandler(
+	ISprintRepository sprintRepository,
+	IUnitOfWork unitOfWork) : ICommandHandler<AddSprintCommand, string>
 {
-	public Task<Result> Handle(AddSprintCommand request, CancellationToken cancellationToken)
+	public async Task<Result<string>> Handle(AddSprintCommand request, CancellationToken cancellationToken)
 	{
-		// ToDo:
-		// Implement BaseRepository
-		// Implement SprintRepository
-		// Extract UserId using IUserContext
-		// Persist the Sprint in database
-		return Task.FromResult(Result.Success());
+		var sprint = Sprint.Create(request.Name, request.StartDate, request.EndDate);
+
+		await sprintRepository.InsertAsync(sprint, cancellationToken);
+
+		var isSaveSuccess = await unitOfWork.SaveChangesAsync(cancellationToken) > 0;
+
+		return isSaveSuccess
+			? Result.Success<string>($"Sprint {sprint.Name} was created successfully.")
+			: Result.Failure<string>(Error.Failure("Not successful", "Failed saving new sprint."));
 	}
 }

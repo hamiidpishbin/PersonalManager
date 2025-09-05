@@ -13,6 +13,6 @@ public class AddSprintCommandValidator : AbstractValidator<AddSprintCommand>
 
 		RuleFor(p => p.StartDate)
 			.LessThan(p => p.EndDate)
-			.WithMessage("Start date should be smaller than end date.");
+			.WithMessage("Start date should be before the end date.");
 	}
 }

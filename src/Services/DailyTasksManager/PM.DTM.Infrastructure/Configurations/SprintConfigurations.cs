@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PM.DTM.Domain.Models.Sprints;
 
-namespace PM.DTM.Infrastructure.Sprints;
+namespace PM.DTM.Infrastructure.Configurations;
 
 public class SprintConfigurations : IEntityTypeConfiguration<Sprint>
 {

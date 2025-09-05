@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using PM.Common.Domain;
 
-namespace PM.DTM.Application.Abstractions.Data;
+namespace PM.DTM.Application.Abstractions.Repositories;
 
 public interface IDTMRepository<TEntity, in TId> 
 	where TEntity : Entity<TId>
@@ -15,3 +15,5 @@ public interface IDTMRepository<TEntity, in TId>
 	void Update(TEntity entity);
 	void Delete(TEntity entity);
 }
+
+public interface IDTMRepository<TEntity> : IDTMRepository<TEntity, Guid> where TEntity : Entity<Guid>; 

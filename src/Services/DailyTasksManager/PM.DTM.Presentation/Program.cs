@@ -1,3 +1,4 @@
+using PM.Common.Infrastructure.Logging;
 using PM.Common.Presentation.Endpoints;
 using PM.Common.Presentation.Exceptions;
 using PM.DTM.Application.Extensions;
@@ -6,6 +7,8 @@ using PM.DTM.Presentation;
 using PM.DTM.Presentation.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseCustomSerilog();
 
 // Add services to the container.
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
@@ -24,6 +27,8 @@ if (app.Environment.IsDevelopment())
 }
 
 // Configure the HTTP request pipeline.
+app.UsePresentationServices();
+
 app.UseExceptionHandler();
 
 app.UseAuthentication();

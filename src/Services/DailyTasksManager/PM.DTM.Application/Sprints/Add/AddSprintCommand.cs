@@ -2,7 +2,7 @@ using PM.Common.Application.Messaging;
 
 namespace PM.DTM.Application.Sprints.Add;
 
-public class AddSprintCommand : ICommand
+public class AddSprintCommand : ICommand<string>
 {
 	public string Name { get; set; }
 	public DateTime StartDate { get; set; }

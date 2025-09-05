@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PM.Common.Application.Abstractions.Authentication;
 using PM.Common.Infrastructure.Authentication;
+using PM.Common.Infrastructure.Interceptors;
 using PM.Common.Infrastructure.Logging;
 
 namespace PM.Common.Infrastructure;
@@ -13,6 +14,8 @@ public static class DependencyInjectionExtensions
 		services.AddCustomLogging(configuration);
 
 		services.AddHttpContextAccessor();
+		
+		services.AddScoped<AuditInterceptor>();
 		
 		services.AddScoped<IUserContext, UserContext>();
 		

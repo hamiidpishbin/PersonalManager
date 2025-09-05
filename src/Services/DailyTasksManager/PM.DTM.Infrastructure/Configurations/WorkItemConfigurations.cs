@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PM.DTM.Domain.Models.WorkItems;
 
-namespace PM.DTM.Infrastructure.WorkItems;
+namespace PM.DTM.Infrastructure.Configurations;
 
 public class WorkItemConfigurations : IEntityTypeConfiguration<WorkItem>
 {

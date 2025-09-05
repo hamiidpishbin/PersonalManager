@@ -1,8 +1,7 @@
-using PM.DTM.Application.WorkItems;
+using PM.DTM.Application.Abstractions.Repositories;
 using PM.DTM.Domain.Models.WorkItems;
-using PM.DTM.Infrastructure.Data;
 
-namespace PM.DTM.Infrastructure.WorkItems;
+namespace PM.DTM.Infrastructure.Data.Repositories;
 
 public class WorkItemRepository(DTMDbContext dbContext) : DTMRepository<WorkItem>(dbContext), IWorkItemRepository
 {

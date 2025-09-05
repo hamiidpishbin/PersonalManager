@@ -1,9 +1,9 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using PM.Common.Domain;
-using PM.DTM.Application.Abstractions.Data;
+using PM.DTM.Application.Abstractions.Repositories;
 
-namespace PM.DTM.Infrastructure.Data;
+namespace PM.DTM.Infrastructure.Data.Repositories;
 
 public abstract class DTMRepository<TEntity, TId>(DTMDbContext dbContext) 
 	: IDTMRepository<TEntity, TId>

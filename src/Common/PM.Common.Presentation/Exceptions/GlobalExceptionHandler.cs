@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +20,8 @@ public sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logge
 		{
 			Status = StatusCodes.Status500InternalServerError,
 			Type = "https://datatracker.ietf.org/doc/html/rfc7231#section-6.6.1",
-			Title = "Server failure"
+			Title = "Server failure",
+			Extensions = { ["TraceId"] = Activity.Current?.TraceId.ToString() ?? "N/A" }
 		};
 
 		httpContext.Response.StatusCode = problemDetails.Status.Value;

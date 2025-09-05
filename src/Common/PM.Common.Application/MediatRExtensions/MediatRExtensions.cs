@@ -13,6 +13,7 @@ public static class MediatRExtensions
 			config.RegisterServicesFromAssembly(assembly);
 
 			config.AddOpenBehavior(typeof(ExceptionHandlingPipelineBehavior<,>));
+			config.AddOpenBehavior(typeof(RequestLoggingPipelineBehavior<,>));
 		});
 
 		return services;
